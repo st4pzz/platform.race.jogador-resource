@@ -6,7 +6,8 @@ import org.springframework.stereotype.Service;
 
 import insper.store.account.AccountController;
 import insper.store.account.AccountOut;
-import insper.store.jogador.*;
+import insper.store.partida.PartidaController;
+import insper.store.partida.PartidaOut;
 import lombok.NonNull;
 
 @Service
@@ -25,7 +26,7 @@ public class JogadorService {
     
     public Jogador create(Jogador in) {
 
-        ResponseEntity<JogadorOut> response = PartidaController.read(in.id_partida());
+        ResponseEntity<PartidaOut> response = PartidaController.read(in.id_partida());
 
         if (response.getStatusCode().isError()) throw new IllegalArgumentException("Invalid partida");
 
