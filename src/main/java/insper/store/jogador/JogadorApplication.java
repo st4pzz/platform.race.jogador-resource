@@ -5,7 +5,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.cloud.openfeign.EnableFeignClients;
 
-@EnableFeignClients
+@EnableFeignClients(basePackages = { "insper.store.account", "insper.store.partida" })
 @EnableDiscoveryClient
 @SpringBootApplication
 public class JogadorApplication {

@@ -30,6 +30,19 @@
 			<groupId>org.flywaydb</groupId>
 			<artifactId>flyway-core</artifactId>
 		</dependency>
+		<dependency>
+			<groupId>insper.store</groupId>
+			<artifactId>partida</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>insper.store</groupId>
+			<artifactId>account</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+
+
 		
 		<dependency>
 			<groupId>insper.store</groupId>

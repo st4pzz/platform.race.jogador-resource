@@ -26,6 +26,12 @@ public class JogadorModel {
     @Column(name = "id_jogador")
     private String id;
 
+    @Column(name = "id_user")
+    private String idUser;
+
+    @Column(name = "id_partida")
+    private String idPartida;
+
     @Column(name = "tx_nome")
     private String nome;
 

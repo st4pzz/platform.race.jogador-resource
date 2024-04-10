@@ -1,13 +1,12 @@
 package insper.store.jogador;
 
-import java.nio.charset.StandardCharsets;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
-import java.util.Base64;
-
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import insper.store.account.AccountController;
+import insper.store.account.AccountOut;
+import insper.store.jogador.*;
 import lombok.NonNull;
 
 @Service
@@ -16,14 +15,32 @@ public class JogadorService {
     @Autowired
     private JogadorRepository JogadorRepository;
 
+    @Autowired
+    private PartidaController PartidaController;
+    
+    @Autowired
+    private AccountController accountController;
+
 
     
-    public Iterable<JogadorModel> readAll() {
-        return JogadorRepository.findAll();
-    }
-
     public Jogador create(Jogador in) {
+
+        ResponseEntity<JogadorOut> response = PartidaController.read(in.id_partida());
+
+        if (response.getStatusCode().isError()) throw new IllegalArgumentException("Invalid partida");
+
+        ResponseEntity<AccountOut> response2 = accountController.read(in.id_user());
+
+        if (response2.getStatusCode().isError()) throw new IllegalArgumentException("Invalid user");
+        
+        System.out.println("------------------------------------------------------------------------------------");
+        System.out.println(response2.getBody());
+        System.out.println(response.getBody());
+        System.out.println("------------------------------------------------------------------------------------");
+
+        
         return JogadorRepository.save(new JogadorModel(in)).to();
+        
     }
 
     public Jogador read(@NonNull String id) {
