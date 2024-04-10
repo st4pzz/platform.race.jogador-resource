@@ -1,12 +1,13 @@
-CREATE TABLE job
+CREATE TABLE jogador
 (
-    id_job character varying(36) NOT NULL,
-    tx_empresa character varying(256) NOT NULL,
-    tx_cargo character varying(256) NOT NULL,
-    tx_descricao character varying(256) NOT NULL,
-    tx_salario float NOT NULL,
+    id_jogador character varying(36) NOT NULL,
+    tx_nome character varying(256) NOT NULL,
+    tx_time character varying(256) NOT NULL,
+    tx_posicao character varying(256) NOT NULL,
+    tx_idade INT NOT NULL,
+    vl_salario FLOAT NOT NULL
 
-    CONSTRAINT job_pkey PRIMARY KEY (id_job)
+    CONSTRAINT jogador_pkey PRIMARY KEY (id_jogador)
 );
 
 
