@@ -16,7 +16,7 @@ import lombok.experimental.Accessors;
 
 @Entity
 @Table(name = "jogador")
-@EqualsAndHashCode(of = "id")
+@EqualsAndHashCode(of = "id_jogador")
 @Builder @Getter @Setter @Accessors(chain = true, fluent = true)
 @NoArgsConstructor @AllArgsConstructor
 public class JogadorModel {
@@ -24,13 +24,13 @@ public class JogadorModel {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     @Column(name = "id_jogador")
-    private String id;
+    private String id_jogador;
 
     @Column(name = "id_user")
-    private String idUser;
+    private String id_user;
 
     @Column(name = "id_partida")
-    private String idPartida;
+    private String id_partida;
 
     @Column(name = "tx_nome")
     private String nome;
@@ -41,33 +41,31 @@ public class JogadorModel {
     @Column(name = "tx_posicao")
     private String posicao;
 
-    @Column(name = "tx_idade")
+    @Column(name = "idade")
     private Integer idade;
 
-    @Column(name = "vl_salario")
-    private Float salario;
 
     public JogadorModel(Jogador o) {
-        this.id = o.id();
-        this.idUser = o.id_user();
-        this.idPartida = o.id_partida();
+        this.id_jogador = o.id_jogador();
+        this.id_user = o.id_user();
+        this.id_partida = o.id_partida();
         this.nome = o.nome();
         this.time = o.time();
         this.posicao = o.posicao();
         this.idade = o.idade();
-        this.salario = o.salario();
+        
     }
     
     public Jogador to() {
         return Jogador.builder()
-            .id(id)
-            .id_user(idUser)
-            .id_partida(idPartida)
+            .id_jogador(id_jogador)
+            .id_user(id_user)
+            .id_partida(id_partida)
             .nome(nome)
             .time(time)
             .posicao(posicao)
             .idade(idade)
-            .salario(salario)
+            
             .build();
     }
     

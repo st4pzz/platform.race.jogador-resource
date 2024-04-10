@@ -59,7 +59,7 @@ public class JogadorResource implements JogadorController {
                                 ServletUriComponentsBuilder
                                                 .fromCurrentRequest()
                                                 .path("/{id}")
-                                                .buildAndExpand(jogador.id())
+                                                .buildAndExpand(jogador.id_jogador())
                                                 .toUri())
                                 .body(JogadorParser.to(jogador));
         }
