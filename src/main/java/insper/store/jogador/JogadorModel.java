@@ -49,6 +49,8 @@ public class JogadorModel {
 
     public JogadorModel(Jogador o) {
         this.id = o.id();
+        this.idUser = o.id_user();
+        this.idPartida = o.id_partida();
         this.nome = o.nome();
         this.time = o.time();
         this.posicao = o.posicao();
@@ -59,6 +61,8 @@ public class JogadorModel {
     public Jogador to() {
         return Jogador.builder()
             .id(id)
+            .id_user(idUser)
+            .id_partida(idPartida)
             .nome(nome)
             .time(time)
             .posicao(posicao)
