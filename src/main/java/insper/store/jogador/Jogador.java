@@ -12,7 +12,7 @@ import lombok.experimental.Accessors;
 @AllArgsConstructor @NoArgsConstructor
 public class Jogador {
 
-    private String id_jogador;
+    private String id;
     private String id_user;
     private String id_partida;
     private String nome;

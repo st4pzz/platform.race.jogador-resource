@@ -16,7 +16,7 @@ import lombok.experimental.Accessors;
 
 @Entity
 @Table(name = "jogador")
-@EqualsAndHashCode(of = "id_jogador")
+@EqualsAndHashCode(of = "id")
 @Builder @Getter @Setter @Accessors(chain = true, fluent = true)
 @NoArgsConstructor @AllArgsConstructor
 public class JogadorModel {
@@ -24,12 +24,12 @@ public class JogadorModel {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     @Column(name = "id_jogador")
-    private String id_jogador;
+    private String id;
 
-    @Column(name = "id_user")
+    @Column(name = "tx_id_user")
     private String id_user;
 
-    @Column(name = "id_partida")
+    @Column(name = "tx_id_partida")
     private String id_partida;
 
     @Column(name = "tx_nome")
@@ -46,7 +46,7 @@ public class JogadorModel {
 
 
     public JogadorModel(Jogador o) {
-        this.id_jogador = o.id_jogador();
+        this.id = o.id();
         this.id_user = o.id_user();
         this.id_partida = o.id_partida();
         this.nome = o.nome();
@@ -58,7 +58,7 @@ public class JogadorModel {
     
     public Jogador to() {
         return Jogador.builder()
-            .id_jogador(id_jogador)
+            .id(id)
             .id_user(id_user)
             .id_partida(id_partida)
             .nome(nome)

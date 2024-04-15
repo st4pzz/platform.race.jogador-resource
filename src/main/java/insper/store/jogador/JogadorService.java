@@ -34,12 +34,6 @@ public class JogadorService {
 
         if (response2.getStatusCode().isError()) throw new IllegalArgumentException("Invalid user");
         
-        System.out.println("------------------------------------------------------------------------------------");
-        System.out.println(response2.getBody());
-        System.out.println(response.getBody());
-        System.out.println("------------------------------------------------------------------------------------");
-
-        
         return JogadorRepository.save(new JogadorModel(in)).to();
         
     }
