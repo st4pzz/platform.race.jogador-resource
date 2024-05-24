@@ -5,7 +5,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.cache.annotation.CachePut;
-import org.springframework.cache.annotation.CacheEvict;
 import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
 
 import insper.store.account.AccountController;
