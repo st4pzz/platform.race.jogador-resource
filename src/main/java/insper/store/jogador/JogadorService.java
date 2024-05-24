@@ -3,6 +3,9 @@ package insper.store.jogador;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.cache.annotation.Cacheable;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.CacheEvict;
 
 import insper.store.account.AccountController;
 import insper.store.account.AccountOut;
@@ -23,7 +26,7 @@ public class JogadorService {
     private AccountController accountController;
 
 
-    
+    @CachePut(value = "jogadores", key = "#result.id")
     public Jogador create(Jogador in) {
 
         ResponseEntity<PartidaOut> response = PartidaController.read(in.id_partida());
@@ -37,7 +40,7 @@ public class JogadorService {
         return JogadorRepository.save(new JogadorModel(in)).to();
         
     }
-
+    @Cacheable(value = "jogadores", key = "#id")
     public Jogador read(@NonNull String id) {
         return JogadorRepository.findById(id).map(JogadorModel::to).orElse(null);
     }
