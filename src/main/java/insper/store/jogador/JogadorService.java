@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.CacheEvict;
+import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
 
 import insper.store.account.AccountController;
 import insper.store.account.AccountOut;
@@ -17,32 +18,41 @@ import lombok.NonNull;
 public class JogadorService {
 
     @Autowired
-    private JogadorRepository JogadorRepository;
+    private JogadorRepository jogadorRepository;
 
     @Autowired
-    private PartidaController PartidaController;
-    
+    private PartidaController partidaController;
+
     @Autowired
     private AccountController accountController;
 
-
+    @CircuitBreaker(name = "jogadorService", fallbackMethod = "fallbackCreate")
     @CachePut(value = "jogadores", key = "#result.id")
     public Jogador create(Jogador in) {
-
-        ResponseEntity<PartidaOut> response = PartidaController.read(in.id_partida());
-
-        if (response.getStatusCode().isError()) throw new IllegalArgumentException("Invalid partida");
+        ResponseEntity<PartidaOut> response = partidaController.read(in.id_partida());
+        if (response.getStatusCode().isError()) {
+            throw new IllegalArgumentException("Invalid partida");
+        }
 
         ResponseEntity<AccountOut> response2 = accountController.read(in.id_user());
+        if (response2.getStatusCode().isError()) {
+            throw new IllegalArgumentException("Invalid user");
+        }
 
-        if (response2.getStatusCode().isError()) throw new IllegalArgumentException("Invalid user");
-        
-        return JogadorRepository.save(new JogadorModel(in)).to();
-        
+        return jogadorRepository.save(new JogadorModel(in)).to();
     }
+
+    public Jogador fallbackCreate(Jogador in, Throwable t) {
+        return new Jogador();   
+    }
+
+    @CircuitBreaker(name = "jogadorService", fallbackMethod = "fallbackRead")
     @Cacheable(value = "jogadores", key = "#id")
     public Jogador read(@NonNull String id) {
-        return JogadorRepository.findById(id).map(JogadorModel::to).orElse(null);
+        return jogadorRepository.findById(id).map(JogadorModel::to).orElse(null);
     }
-    
+
+    public Jogador fallbackRead(String id, Throwable t) {
+        return new Jogador();
+    }
 }
