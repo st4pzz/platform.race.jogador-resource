@@ -1,5 +1,7 @@
 package insper.store.jogador;
 
+
+
 public class JogadorParser {
 
     public static Jogador to(JogadorIn in) {
