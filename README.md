@@ -18,20 +18,25 @@ A arquitetura do projeto utiliza uma abordagem de microserviços, onde cada comp
 ## Estrutura do Projeto
 
 ```
-platform.race.jogador-resource/
-├── src/
-│   ├── main/
-│   │   ├── java/
-│   │   │   └── com/
-│   │   │       └── example/
-│   │   │           └── jogadorresource/
-│   │   │               ├── controller/
-│   │   │               ├── model/
-│   │   │               ├── repository/
-│   │   │               └── service/
-│   └── resources/
+jogador-resource/
+│   ├── k8s/
+│   ├── src/
+│      ├── main/
+│      │   ├── java/
+│      │      └── insper/
+│      │          └── store/
+│      │              └── jogador/
+│      │                  ├── Jogador/
+│      │                  ├── JogadorApplication/
+│      │                  ├── JogadorModel/
+│      │                  ├── JogadorParser/
+│      │                  ├── JogadorRepository/
+│      │                  ├── JogadorResource/
+│      │                  └── JogadorService/
+│      └── resources/
+├── .gitignore
+├── Dockerfile
 ├── Jenkinsfile
-├── docker-compose.yml
 ├── README.md
 └── pom.xml
 ```
